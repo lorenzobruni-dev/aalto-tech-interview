@@ -1,17 +1,24 @@
+@font-face {
+    font-family: "custom-font";
+    src: url("assets/font/karbon-regular-webfont.ttf") format("truetype"),
+    url("assets/font/karbon-semibold-webfont.ttf") format("truetype");
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "custom-font", system-ui, Avenir, Helvetica, Arial, sans-serif;;
+    line-height: 1.5;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: white;
 }
 
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+    margin: 0;
+    display: flex;
+    place-items: center;
 }
 
