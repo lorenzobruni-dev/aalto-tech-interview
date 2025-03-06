@@ -1,0 +1,11 @@
+.logo-top-bar {
+    padding-block: 19px;
+    padding-left: 353px;
+}
+
+
+@media (max-width: 700px) {
+    .logo-top-bar {
+        padding: 0;
+    }
+}
