@@ -1,0 +1,10 @@
+.form-control-label .MuiFormControlLabel-label {
+    font-weight: bold;
+    font-family: 'Karbon Semibold', sans-serif;
+    color: #003479;
+    font-size: 14px;
+    text-transform: uppercase;
+    max-height: 8px;
+    display: flex;
+    align-items: center;
+}

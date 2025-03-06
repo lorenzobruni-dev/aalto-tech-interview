@@ -4,5 +4,31 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    flex-direction: column;
+}
+.filter-content {
+    background-color: #F4F4F4;
+    width: 300px;
+    min-width: 250px;
+    max-height: 353px;
+    overflow: auto;
+    flex-shrink: 0;
+    border-radius: 12px;
+    padding: 18px;
+}
+.table-content {
+    flex-grow: 1;
+    min-width: 400px;
+    max-width: 900px;
+    background-color: #F4F4F4;
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+@media (max-width: 700px) {
+    .filter-content{
+        max-height: 20%;
+    }
+    .table-content{
+        max-height: 80%;
+    }
 }

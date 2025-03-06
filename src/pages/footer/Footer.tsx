@@ -6,9 +6,9 @@ export const Footer = () => {
   return (
     <Box className={"footer-container"}>
       <Box className={"footer-content"}>
-        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod
-        tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrum exercitationem ullamco
+        © lorenzobruni-dev. Questo software è stato creato principalmente per
+        un colloquio tecnico e non ha finalità promozionali. Tutti i diritti
+        riservati.
       </Box>
     </Box>
   );

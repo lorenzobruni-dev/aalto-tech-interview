@@ -1,0 +1,51 @@
+.textfield .MuiInputBase-root {
+
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+}
+
+.textfield{
+    height: 44px;
+    width: 100%;
+}
+
+.textfield .MuiOutlinedInput-root {
+    height: 50px;
+    border-radius: 0;
+    border-color: #FFFFFF;font-style: italic;
+
+}
+
+.textfield .MuiOutlinedInput-root > input{
+    font-size: 14px;
+    font-style: italic;
+    font-family: 'Karbon Semibold', sans-serif;
+    color: grey;
+}
+
+
+.textfield input {
+    height: 100% ;
+    padding: 0 12px;
+}
+
+.text-input-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    height: 50px;
+    align-items: center;
+}
+
+.wrapper-img{
+    padding: 8px;
+    background-color:#644C79;
+    cursor: pointer;
+}
+
+.search-img{
+    height: 100%;
+    width: 100%;
+}

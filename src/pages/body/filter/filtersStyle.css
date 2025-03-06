@@ -1,0 +1,36 @@
+.filters-container{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.inner-filters-container{
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filters-title {
+    font-weight: bold;
+    font-family: 'Karbon Semibold', sans-serif;
+    color: #003479;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+.reset-filters-button{
+    font-weight: bold;
+    font-family: 'Karbon Regular', sans-serif;
+    color: #003479;
+    font-size: 18px;
+    text-transform: capitalize;
+    text-decoration: underline;
+    padding: 2px;
+    cursor: pointer;
+}

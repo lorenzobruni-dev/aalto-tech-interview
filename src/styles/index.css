@@ -1,11 +1,17 @@
 @font-face {
-    font-family: "custom-font";
+    font-family: "Karbon Regular";
     src: url("assets/font/karbon-regular-webfont.ttf") format("truetype"),
     url("assets/font/karbon-semibold-webfont.ttf") format("truetype");
 }
+@font-face {
+    font-family: 'Karbon Semibold';
+    src: url('assets/font/karbon-semibold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
 
 :root {
-    font-family: "custom-font", system-ui, Avenir, Helvetica, Arial, sans-serif;;
+    font-family: "Karbon Regular", system-ui, Avenir, Helvetica, Arial, sans-serif;;
     line-height: 1.5;
     font-weight: 400;
     font-synthesis: none;
@@ -13,11 +19,34 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: white;
+
+}
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track-piece{
+    background-color: #FFF;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #CBCBCB;
+    outline: 2px solid #FFF;
+    outline-offset: -2px;
+    border: 1px solid #B7B7B7;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background-color: #909090;
 }
 
 
-body {
+html , body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
     display: flex;
     place-items: center;
 }
