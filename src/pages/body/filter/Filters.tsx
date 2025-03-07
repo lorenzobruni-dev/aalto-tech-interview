@@ -4,8 +4,9 @@ import { TextInputCustom } from "../../../components/filtersComponents/textInput
 import { SwitchCustom } from "../../../components/filtersComponents/switch/SwitchCustom";
 import { useResetFilters } from "../../../utils/zustandUtils";
 import { useState } from "react";
+import { StretchedCommonType } from "../../../utils/types";
 
-export const Filters = () => {
+export const Filters = ({ isStretched }: StretchedCommonType) => {
   const EMPTY_STRING = "";
   const [idValue, setIdValue] = useState<string>(EMPTY_STRING);
   const [nameValue, setNameValue] = useState<string>(EMPTY_STRING);
@@ -19,7 +20,7 @@ export const Filters = () => {
 
   return (
     <Box className={"filters-container"}>
-      <Box className={"filters-title"}>Filters</Box>
+      {!isStretched && <Box className={"filters-title"}>Filters</Box>}
       <Box className={"inner-filters-container"}>
         <TextInputCustom
           isResetAction={isResetFiltersClicked}

@@ -1,0 +1,22 @@
+.title-row{
+    font-weight: bold;
+    font-family: 'Karbon Semibold', sans-serif;
+    color: #003479;
+    font-size: 14px;
+    text-transform: uppercase;
+    max-height: 8px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.padding-between-rows{
+    height: 20px
+}
+
+.table-row-todo{
+    background-color: white;
+    border-bottom: 10px solid red;
+    height: 10px;
+}
+

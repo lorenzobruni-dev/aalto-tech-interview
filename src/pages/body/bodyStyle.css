@@ -20,13 +20,15 @@
     min-width: 400px;
     max-width: 900px;
     background-color: #F4F4F4;
-    overflow-x: auto;
+    overflow: auto;
     border-radius: 12px;
 }
 
 @media (max-width: 700px) {
     .filter-content{
+        width: 98%;
         max-height: 20%;
+        padding: 2px;
     }
     .table-content{
         max-height: 80%;

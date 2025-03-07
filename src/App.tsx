@@ -1,7 +1,7 @@
 import "./styles/App.css";
 import "./styles/gridStyle.css";
 import React, { useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { Topbar } from "./pages/topbar/Topbar.tsx";
 import { Footer } from "./pages/footer/Footer.tsx";
 import { BodyApplication } from "./pages/body/BodyApplication.tsx";
@@ -15,6 +15,8 @@ const App = () => {
     (state) => state.setIsClickResetFilterButtonToFalse,
   );
 
+  const isStretched = useMediaQuery("(max-width: 700px)");
+
   useEffect(() => {
     setTimeout(() => {
       if (isResetFiltersClicked) setIsClickResetFilterButtonToTrue();
@@ -24,7 +26,7 @@ const App = () => {
   return (
     <Box className={"grid-container"}>
       <Topbar />
-      <BodyApplication />
+      <BodyApplication isStretched={isStretched} />
       <Footer />
     </Box>
   );
