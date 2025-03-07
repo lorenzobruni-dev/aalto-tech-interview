@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     width: 100%;
 }
+
 .filter-content {
     background-color: #F4F4F4;
     width: 300px;
@@ -15,6 +16,7 @@
     border-radius: 12px;
     padding: 18px;
 }
+
 .table-content {
     flex-grow: 1;
     min-width: 400px;
@@ -25,12 +27,13 @@
 }
 
 @media (max-width: 700px) {
-    .filter-content{
-        width: 98%;
+    .filter-content {
+        width: calc(100% - 5%);
         max-height: 20%;
-        padding: 2px;
+        padding: 12px;
     }
-    .table-content{
+
+    .table-content {
         max-height: 80%;
     }
 }

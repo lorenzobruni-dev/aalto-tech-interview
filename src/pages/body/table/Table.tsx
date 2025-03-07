@@ -57,9 +57,30 @@ export const TableTodo = () => {
               <>
                 <TableRow className={"padding-between-rows"} />
                 <TableRow className={"table-row-todo"} key={todo.id}>
-                  <TableCell>{todo.userId}</TableCell>
-                  <TableCell>{todo.title}</TableCell>
-                  <TableCell>{todo.completed ? "✅" : "❌"}</TableCell>
+                  <TableCell
+                    className={"cell-content"}
+                    sx={{
+                      fontFamily: '"Karbon Regular" , sans serif',
+                    }}
+                  >
+                    {todo.userId}
+                  </TableCell>
+                  <TableCell
+                    className={"cell-content"}
+                    sx={{
+                      fontFamily: '"Karbon Regular" , sans serif',
+                    }}
+                  >
+                    {todo.title}
+                  </TableCell>
+                  <TableCell
+                    className={"cell-content"}
+                    sx={{
+                      fontFamily: '"Karbon Regular" , sans serif',
+                    }}
+                  >
+                    {todo.completed ? "✅" : "❌"}
+                  </TableCell>
                 </TableRow>
                 <TableRow className={"padding-between-rows"} />
               </>
@@ -71,7 +92,11 @@ export const TableTodo = () => {
         count={Math.ceil(todo.length / ROWS_PER_PAGE)}
         page={page}
         onChange={(event, value) => setPage(value)}
-        sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 8,
+        }}
       />
     </Paper>
   );

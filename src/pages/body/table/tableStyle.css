@@ -1,4 +1,4 @@
-.title-row{
+.title-row {
     font-weight: bold;
     font-family: 'Karbon Semibold', sans-serif;
     color: #003479;
@@ -8,15 +8,23 @@
     display: flex;
     align-items: center;
     user-select: none;
+    white-space: nowrap;
 }
 
-.padding-between-rows{
+.padding-between-rows {
     height: 20px
 }
 
-.table-row-todo{
+.table-row-todo {
     background-color: white;
-    border-bottom: 10px solid red;
-    height: 10px;
+}
+
+.cell-content {
+    font-weight: bold;
+    font-family: 'Karbon Regular', sans-serif;
+    color: #003479;
+    font-size: 32px;
+    text-transform: capitalize;
+    user-select: none;
 }
 

@@ -3,7 +3,7 @@ import "./filtersStyle.css";
 import { TextInputCustom } from "../../../components/filtersComponents/textInput/TextInputCustom";
 import { SwitchCustom } from "../../../components/filtersComponents/switch/SwitchCustom";
 import { useResetFilters } from "../../../utils/zustandUtils";
-import { useState } from "react";
+import React, { useState } from "react";
 import { StretchedCommonType } from "../../../utils/types";
 
 export const Filters = ({ isStretched }: StretchedCommonType) => {
