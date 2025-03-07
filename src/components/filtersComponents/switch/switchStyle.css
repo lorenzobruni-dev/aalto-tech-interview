@@ -7,4 +7,5 @@
     max-height: 8px;
     display: flex;
     align-items: center;
+    user-select: none;
 }

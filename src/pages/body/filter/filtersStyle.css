@@ -33,4 +33,5 @@
     text-decoration: underline;
     padding: 2px;
     cursor: pointer;
+    user-select: none;
 }

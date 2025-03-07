@@ -14,14 +14,6 @@ export const SwitchCustom: React.FC<SwitchCustomType> = ({ isResetAction }) => {
   const [switchChecked, setSwitchChecked] = useState<boolean>(true);
   const SwitchOnOff = styled(Switch)(({ theme }: SwitchThemeProps) => ({
     padding: 8,
-    "& .MuiFormControlLabel-label": {
-      fontWeight: "bold",
-      fontFamily: "'Karbon Semibold', sans-serif",
-      color: "#003479",
-      fontSize: "14px",
-      textTransform: "uppercase",
-      maxHeight: "8px",
-    },
     "& .MuiSwitch-track": {
       borderRadius: 12,
       "&::before, &::after": {
