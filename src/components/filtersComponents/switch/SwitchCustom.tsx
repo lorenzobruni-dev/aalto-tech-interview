@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, FormControlLabel, styled, Switch, Theme } from "@mui/material";
 import "./switchStyle.css";
-type SwitchThemeProps = {
+
+interface SwitchThemeProps {
   theme: Theme;
+}
+
+type SwitchCustomType = {
+  isResetAction: boolean;
 };
-export const SwitchCustom: React.FC = () => {
+
+export const SwitchCustom: React.FC<SwitchCustomType> = ({ isResetAction }) => {
   const [switchChecked, setSwitchChecked] = useState<boolean>(true);
   const SwitchOnOff = styled(Switch)(({ theme }: SwitchThemeProps) => ({
     padding: 8,
@@ -46,6 +52,10 @@ export const SwitchCustom: React.FC = () => {
       margin: 2,
     },
   }));
+
+  useEffect(() => {
+    if (isResetAction) setSwitchChecked(true);
+  }, [isResetAction]);
 
   return (
     <Box style={{ width: "100%", marginLeft: 2 }}>
