@@ -9,11 +9,9 @@ type TextInputProps = {
   textValue: string;
   setTextValue: Dispatch<SetStateAction<string>>;
   actionTextInput?: () => void;
-  hasButton?: boolean;
 };
 export const TextInputCustom: React.FC<TextInputProps> = ({
   actionTextInput,
-  hasButton,
   placeholder,
   isResetAction,
   textValue,
@@ -24,11 +22,10 @@ export const TextInputCustom: React.FC<TextInputProps> = ({
   }, [isResetAction]);
   return (
     <Box className={"text-input-container"}>
-      {hasButton && (
-        <Box className={"wrapper-img"} onClick={actionTextInput}>
-          <Box className={"search-img"} component={"img"} src={iconSearch} />
-        </Box>
-      )}
+      <Box className={"wrapper-img"} onClick={actionTextInput}>
+        <Box className={"search-img"} component={"img"} src={iconSearch} />
+      </Box>
+
       <TextField
         value={textValue}
         onChange={(textValue) => setTextValue(textValue.target.value)}

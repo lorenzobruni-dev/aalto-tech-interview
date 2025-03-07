@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,20 +11,16 @@ import {
 } from "@mui/material";
 import { TodoType } from "../../../utils/types";
 import "./tableStyle.css";
+import { useDataFetch } from "../../../utils/zustandUtils";
 
 export const TableTodo = () => {
-  const [todo, setTodo] = useState<TodoType[]>([]);
+  const { data } = useDataFetch();
   const [page, setPage] = useState<number>(1);
   const ROWS_PER_PAGE = 5;
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((data) => setTodo(data));
-  }, []);
-
   const startIndex: number = (page - 1) * ROWS_PER_PAGE;
-  const selectedTodos: TodoType[] = todo.slice(
+  console.log(data);
+  const selectedTodos: TodoType[] = data.slice(
     startIndex,
     startIndex + ROWS_PER_PAGE,
   );
@@ -89,13 +85,13 @@ export const TableTodo = () => {
         </Table>
       </TableContainer>
       <Pagination
-        count={Math.ceil(todo.length / ROWS_PER_PAGE)}
+        count={Math.ceil(data.length / ROWS_PER_PAGE)}
         page={page}
         onChange={(event, value) => setPage(value)}
         sx={{
           display: "flex",
           justifyContent: "center",
-          marginTop: 8,
+          marginTop: 2,
         }}
       />
     </Paper>

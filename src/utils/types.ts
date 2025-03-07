@@ -4,7 +4,3 @@ export type TodoType = {
   title: string;
   completed: boolean;
 };
-
-export type StretchedCommonType = {
-  isStretched: boolean;
-};
