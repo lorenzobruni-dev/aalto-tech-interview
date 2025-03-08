@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, FormControlLabel, styled, Switch, Theme } from "@mui/material";
 import "./switchStyle.css";
 import { useFilterApplied } from "../../../utils/zustandUtils";
-import { FilterAppliedType } from "../../../utils/types";
+import { TypeFieldsTable } from "../../../utils/types";
 
 interface SwitchThemeProps {
   theme: Theme;
@@ -53,7 +53,7 @@ export const SwitchCustom: React.FC<SwitchCustomType> = ({ isResetAction }) => {
   }, [isResetAction]);
 
   useEffect(() => {
-    setFilterApplied({ completed: switchChecked } as FilterAppliedType);
+    setFilterApplied({ completed: switchChecked } as TypeFieldsTable);
   }, [switchChecked]);
 
   return (

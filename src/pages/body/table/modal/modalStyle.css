@@ -1,0 +1,24 @@
+.modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.save-button {
+    margin-top: 24px;
+}

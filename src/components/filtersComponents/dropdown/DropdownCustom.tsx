@@ -4,24 +4,26 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React, { useEffect, useState } from "react";
 import "./dropdownStyle.css";
-import { useFilterApplied, useSize } from "../../../utils/zustandUtils";
-import { FilterAppliedType } from "../../../utils/types";
+import {
+  useFilterApplied,
+  useMenuUserId,
+  useSize,
+} from "../../../utils/zustandUtils";
+import { TypeFieldsTable } from "../../../utils/types";
 import { EMPTY_STRING } from "../../../utils/emptyState";
 
 type DropdownCustomType = {
-  menuItemUserId: number[];
   isResetAction: boolean;
 };
-export const DropdownCustom = ({
-  isResetAction,
-  menuItemUserId,
-}: DropdownCustomType) => {
+export const DropdownCustom = ({ isResetAction }: DropdownCustomType) => {
+  const { menuItemUserId } = useMenuUserId();
+
   const [userId, setUserId] = useState<string>(EMPTY_STRING);
   const { isStretched } = useSize();
   const { setFilterApplied } = useFilterApplied();
   const handleChange = (event: SelectChangeEvent) => {
     setUserId(event.target.value as string);
-    setFilterApplied({ userId: event.target.value } as FilterAppliedType);
+    setFilterApplied({ userId: event.target.value } as TypeFieldsTable);
   };
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export const DropdownCustom = ({
             value={userId}
             onChange={handleChange}
           >
-            {menuItemUserId.map((item) => (
+            {menuItemUserId?.map((item) => (
               <MenuItem
                 key={item}
                 sx={{

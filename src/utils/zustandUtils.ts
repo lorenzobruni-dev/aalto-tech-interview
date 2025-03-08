@@ -1,37 +1,42 @@
-import { create } from "zustand";
-import { EMPTY_STATE_FILTER, EMPTY_STRING } from "./emptyState";
-import { FilterAppliedType } from "./types";
+import {create} from "zustand";
+import {EMPTY_STATE_FILTER, EMPTY_STRING} from "./emptyState";
+import {TypeFieldsTable} from "./types";
 
 export const useResetFilters = create((set) => ({
   isClickResetFilterButton: false,
   setIsClickResetFilterButtonToTrue: () =>
-    set({ isClickResetFilterButton: true }),
+      set({isClickResetFilterButton: true}),
   setIsClickResetFilterButtonToFalse: () =>
-    set({ isClickResetFilterButton: false }),
+      set({isClickResetFilterButton: false}),
 }));
 
 export const useDataFetch = create((set) => ({
   data: [],
-  setData: (newData) => set({ data: newData }),
+  setData: (newData) => set({data: newData}),
 }));
 
 export const useSize = create((set) => ({
   isStretched: [],
-  setIsStretched: (state) => set({ isStretched: state }),
+  setIsStretched: (state) => set({isStretched: state}),
 }));
 
 export const useFilterApplied = create((set) => ({
-  filterApplied: EMPTY_STATE_FILTER as FilterAppliedType,
+  filterApplied: EMPTY_STATE_FILTER as TypeFieldsTable,
   resetFilterApplied: () =>
-    set({
-      filterApplied: {
-        userId: EMPTY_STRING,
-        title: EMPTY_STRING,
-        completed: true,
-      } as FilterAppliedType,
-    }),
+      set({
+        filterApplied: {
+          userId: EMPTY_STRING,
+          title: EMPTY_STRING,
+          completed: true,
+        } as TypeFieldsTable,
+      }),
   setFilterApplied: (newFilter) =>
-    set((state) => ({
-      filterApplied: { ...state.filterApplied, ...newFilter },
-    })),
+      set((state) => ({
+        filterApplied: {...state.filterApplied, ...newFilter},
+      })),
 }));
+
+export const useMenuUserId = create((set) => ({
+  menuItemUserId: [],
+  setMenuItemUserId: (state) => set({menuItemUserId: state})
+}))

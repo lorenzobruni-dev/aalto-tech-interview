@@ -8,20 +8,33 @@ import {
   TableRow,
   Paper,
   Pagination,
-  Box,
+  Button,
 } from "@mui/material";
-import { TodoType } from "../../../utils/types";
+import { OperationType, TodoType, TypeFieldsTable } from "../../../utils/types";
 import "./tableStyle.css";
 import { useDataFetch, useFilterApplied } from "../../../utils/zustandUtils";
 import { filter, includes, pickBy, toLower } from "lodash";
-import { ROWS_PER_PAGE } from "../../../utils/emptyState";
+import { EMPTY_STATE_FILTER, ROWS_PER_PAGE } from "../../../utils/emptyState";
+import { ModalCustom } from "./modal/ModalCustom";
 
 export const TableTodo = () => {
   const { data } = useDataFetch();
   const { filterApplied } = useFilterApplied();
-
+  const [open, setOpen] = useState<boolean>(false);
+  const [fieldsToEdit, setFieldsToEdit] = useState<TypeFieldsTable | undefined>(
+    EMPTY_STATE_FILTER,
+  );
+  const [operationType, setOperationType] = useState<OperationType>(
+    OperationType.EDIT,
+  );
   const [page, setPage] = useState<number>(1);
-
+  const handleClose = () => setOpen(false);
+  const handleOpen = (opType: OperationType, fields?: TypeFieldsTable) => {
+    if (fields) setFieldsToEdit(fields);
+    else setFieldsToEdit(undefined);
+    setOperationType(opType);
+    setOpen(true);
+  };
   const startIndex: number = (page - 1) * ROWS_PER_PAGE;
   const selectedTodos: TodoType[] = data.slice(
     startIndex,
@@ -49,8 +62,27 @@ export const TableTodo = () => {
         padding: 2,
       }}
     >
+      <Button
+        sx={{
+          fontFamily: '"Karbon Regular" , sans serif',
+          boxShadow: 0,
+          fontWeight: "bold",
+          marginBottom: 1,
+        }}
+        variant={"contained"}
+        onClick={() => handleOpen(OperationType.CREATE)}
+      >
+        Create Row
+      </Button>
+
+      <ModalCustom
+        opType={operationType}
+        fieldsToEdit={fieldsToEdit}
+        handleClose={handleClose}
+        open={open}
+      />
       <TableContainer>
-        <Table stickyHeader>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>
@@ -66,12 +98,26 @@ export const TableTodo = () => {
           </TableHead>
           <TableBody>
             {filteredData.length === 0 ? (
-              <Box sx={{ padding: 2 }}>No matches found</Box>
+              <TableRow className={"table-row-no-matches"}>
+                <TableCell
+                  className={"cell-content"}
+                  sx={{
+                    fontFamily: '"Karbon Regular" , sans serif',
+                  }}
+                  colSpan={3}
+                  align="left"
+                >
+                  No matches found
+                </TableCell>
+              </TableRow>
             ) : (
               contentToRenderInRow.map((todo, key) => (
                 <Fragment key={key}>
                   <TableRow className={"padding-between-rows"} />
-                  <TableRow className={"table-row-todo"}>
+                  <TableRow
+                    className={"table-row-todo"}
+                    onClick={() => handleOpen(OperationType.EDIT, todo)}
+                  >
                     <TableCell
                       className={"cell-content"}
                       sx={{

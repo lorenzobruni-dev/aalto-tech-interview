@@ -12,11 +12,16 @@
 }
 
 .padding-between-rows {
-    height: 20px
+    height: 15px
 }
 
 .table-row-todo {
     background-color: white;
+    cursor: pointer;
+}
+
+.table-row-todo .MuiTableCell-root {
+    border-bottom: 1px #00A0DF solid;
 }
 
 .cell-content {
@@ -26,5 +31,9 @@
     font-size: 32px;
     text-transform: capitalize;
     user-select: none;
+}
+
+.table-row-no-matches .MuiTableCell-root {
+    border-bottom: 0;
 }
 
