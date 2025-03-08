@@ -1,13 +1,13 @@
-.filters-container{
+.filters-container {
     justify-content: space-between;
     align-items: center;
     display: flex;
     height: 100%;
     flex-direction: column;
-    gap: 50px;
+    gap: 40px;
 }
 
-.inner-filters-container{
+.inner-filters-container {
     justify-content: flex-start;
     align-items: center;
     display: flex;
@@ -25,7 +25,7 @@
     user-select: none;
 }
 
-.reset-filters-button{
+.reset-filters-button {
     font-weight: bold;
     font-family: 'Karbon Regular', sans-serif;
     color: #003479;
@@ -37,15 +37,15 @@
     user-select: none;
 }
 
-@media (max-width: 700px){
-    .filters-container{
+@media (max-width: 700px) {
+    .filters-container {
         flex-direction: column;
         max-height: 100%;
         align-items: center;
         gap: 2px
     }
 
-    .inner-filters-container{
+    .inner-filters-container {
         flex-direction: row;
     }
 }

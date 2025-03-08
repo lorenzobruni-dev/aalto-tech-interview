@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,20 +11,15 @@ import {
 } from "@mui/material";
 import { TodoType } from "../../../utils/types";
 import "./tableStyle.css";
+import { useDataFetch } from "../../../utils/zustandUtils";
 
 export const TableTodo = () => {
-  const [todo, setTodo] = useState<TodoType[]>([]);
+  const { data } = useDataFetch();
   const [page, setPage] = useState<number>(1);
   const ROWS_PER_PAGE = 5;
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((data) => setTodo(data));
-  }, []);
-
   const startIndex: number = (page - 1) * ROWS_PER_PAGE;
-  const selectedTodos: TodoType[] = todo.slice(
+  const selectedTodos: TodoType[] = data.slice(
     startIndex,
     startIndex + ROWS_PER_PAGE,
   );
@@ -57,9 +52,30 @@ export const TableTodo = () => {
               <>
                 <TableRow className={"padding-between-rows"} />
                 <TableRow className={"table-row-todo"} key={todo.id}>
-                  <TableCell>{todo.userId}</TableCell>
-                  <TableCell>{todo.title}</TableCell>
-                  <TableCell>{todo.completed ? "✅" : "❌"}</TableCell>
+                  <TableCell
+                    className={"cell-content"}
+                    sx={{
+                      fontFamily: '"Karbon Regular" , sans serif',
+                    }}
+                  >
+                    {todo.userId}
+                  </TableCell>
+                  <TableCell
+                    className={"cell-content"}
+                    sx={{
+                      fontFamily: '"Karbon Regular" , sans serif',
+                    }}
+                  >
+                    {todo.title}
+                  </TableCell>
+                  <TableCell
+                    className={"cell-content"}
+                    sx={{
+                      fontFamily: '"Karbon Regular" , sans serif',
+                    }}
+                  >
+                    {todo.completed ? "✅" : "❌"}
+                  </TableCell>
                 </TableRow>
                 <TableRow className={"padding-between-rows"} />
               </>
@@ -68,10 +84,14 @@ export const TableTodo = () => {
         </Table>
       </TableContainer>
       <Pagination
-        count={Math.ceil(todo.length / ROWS_PER_PAGE)}
+        count={Math.ceil(data.length / ROWS_PER_PAGE)}
         page={page}
         onChange={(event, value) => setPage(value)}
-        sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 2,
+        }}
       />
     </Paper>
   );

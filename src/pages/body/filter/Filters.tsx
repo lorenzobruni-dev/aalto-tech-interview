@@ -2,14 +2,14 @@ import { Box } from "@mui/material";
 import "./filtersStyle.css";
 import { TextInputCustom } from "../../../components/filtersComponents/textInput/TextInputCustom";
 import { SwitchCustom } from "../../../components/filtersComponents/switch/SwitchCustom";
-import { useResetFilters } from "../../../utils/zustandUtils";
-import { useState } from "react";
-import { StretchedCommonType } from "../../../utils/types";
+import { useResetFilters, useSize } from "../../../utils/zustandUtils";
+import React, { useState } from "react";
+import { DropdownCustom } from "../../../components/filtersComponents/dropdown/DropdownCustom";
 
-export const Filters = ({ isStretched }: StretchedCommonType) => {
+export const Filters = () => {
   const EMPTY_STRING = "";
-  const [idValue, setIdValue] = useState<string>(EMPTY_STRING);
   const [nameValue, setNameValue] = useState<string>(EMPTY_STRING);
+  const { isStretched } = useSize();
 
   const setIsClickResetFilterButtonToTrue = useResetFilters(
     (state) => state.setIsClickResetFilterButtonToTrue,
@@ -27,15 +27,15 @@ export const Filters = ({ isStretched }: StretchedCommonType) => {
           textValue={nameValue}
           setTextValue={setNameValue}
           placeholder={"Search..."}
-          hasButton
         />
         <SwitchCustom isResetAction={isResetFiltersClicked} />
-        <TextInputCustom
-          isResetAction={isResetFiltersClicked}
-          textValue={idValue}
-          setTextValue={setIdValue}
-          placeholder={"Select user ID"}
-        />
+        <DropdownCustom />
+        {/*<TextInputCustom
+                    isResetAction={isResetFiltersClicked}
+                    textValue={idValue}
+                    setTextValue={setIdValue}
+                    placeholder={"Select user ID"}
+                />*/}
       </Box>
       <Box
         onClick={setIsClickResetFilterButtonToTrue}
