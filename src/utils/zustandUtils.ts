@@ -1,21 +1,18 @@
-import { create } from "zustand/react";
-import { EMPTY_STATE_FILTER } from "./emptyState";
+import { create } from "zustand";
+import { EMPTY_STATE_FILTER, EMPTY_STRING } from "./emptyState";
+import { FilterAppliedType } from "./types";
 
 export const useResetFilters = create((set) => ({
   isClickResetFilterButton: false,
   setIsClickResetFilterButtonToTrue: () =>
-    set(() => ({
-      isClickResetFilterButton: true,
-    })),
+    set({ isClickResetFilterButton: true }),
   setIsClickResetFilterButtonToFalse: () =>
-    set(() => ({
-      isClickResetFilterButton: false,
-    })),
+    set({ isClickResetFilterButton: false }),
 }));
 
 export const useDataFetch = create((set) => ({
   data: [],
-  setData: (state) => set({ data: state }),
+  setData: (newData) => set({ data: newData }),
 }));
 
 export const useSize = create((set) => ({
@@ -24,13 +21,17 @@ export const useSize = create((set) => ({
 }));
 
 export const useFilterApplied = create((set) => ({
-  filterApplied: EMPTY_STATE_FILTER,
+  filterApplied: EMPTY_STATE_FILTER as FilterAppliedType,
+  resetFilterApplied: () =>
+    set({
+      filterApplied: {
+        userId: EMPTY_STRING,
+        title: EMPTY_STRING,
+        completed: true,
+      } as FilterAppliedType,
+    }),
   setFilterApplied: (newFilter) =>
     set((state) => ({
-      filterApplied: state.filterApplied.map((filter) =>
-        filter.hasOwnProperty(Object.keys(newFilter)[0])
-          ? { ...filter, ...newFilter }
-          : filter,
-      ),
+      filterApplied: { ...state.filterApplied, ...newFilter },
     })),
 }));

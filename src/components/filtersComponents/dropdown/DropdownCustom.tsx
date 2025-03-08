@@ -2,22 +2,31 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dropdownStyle.css";
-import { useDataFetch, useSize } from "../../../utils/zustandUtils";
-import { map, uniq } from "lodash";
+import { useFilterApplied, useSize } from "../../../utils/zustandUtils";
+import { FilterAppliedType } from "../../../utils/types";
+import { EMPTY_STRING } from "../../../utils/emptyState";
 
-export const DropdownCustom = () => {
-  const [userId, setUserId] = useState<string>("");
+type DropdownCustomType = {
+  menuItemUserId: number[];
+  isResetAction: boolean;
+};
+export const DropdownCustom = ({
+  isResetAction,
+  menuItemUserId,
+}: DropdownCustomType) => {
+  const [userId, setUserId] = useState<string>(EMPTY_STRING);
   const { isStretched } = useSize();
-  const { data } = useDataFetch();
-
+  const { setFilterApplied } = useFilterApplied();
   const handleChange = (event: SelectChangeEvent) => {
     setUserId(event.target.value as string);
+    setFilterApplied({ userId: event.target.value } as FilterAppliedType);
   };
 
-  const menuItemUserId = uniq(map(data, "userId"));
-
+  useEffect(() => {
+    if (isResetAction) setUserId(EMPTY_STRING);
+  }, [isResetAction]);
   return (
     <Box className={"dropdown-container"}>
       {!isStretched && (

@@ -2,6 +2,7 @@ import { Box, TextField } from "@mui/material";
 import iconSearch from "../../../../assets/icon-search.svg";
 import "./textInputStyle.css";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
+import { EMPTY_STRING } from "../../../utils/emptyState";
 
 type TextInputProps = {
   placeholder: string;
@@ -18,8 +19,9 @@ export const TextInputCustom: React.FC<TextInputProps> = ({
   setTextValue,
 }) => {
   useEffect(() => {
-    if (isResetAction) setTextValue("");
+    if (isResetAction) setTextValue(EMPTY_STRING);
   }, [isResetAction]);
+
   return (
     <Box className={"text-input-container"}>
       <Box className={"wrapper-img"} onClick={actionTextInput}>

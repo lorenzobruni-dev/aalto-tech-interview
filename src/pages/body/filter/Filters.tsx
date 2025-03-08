@@ -1,49 +1,56 @@
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 import "./filtersStyle.css";
-import { TextInputCustom } from "../../../components/filtersComponents/textInput/TextInputCustom";
-import { SwitchCustom } from "../../../components/filtersComponents/switch/SwitchCustom";
-import { useResetFilters, useSize } from "../../../utils/zustandUtils";
-import React, { useState } from "react";
-import { DropdownCustom } from "../../../components/filtersComponents/dropdown/DropdownCustom";
+import {TextInputCustom} from "../../../components/filtersComponents/textInput/TextInputCustom";
+import {SwitchCustom} from "../../../components/filtersComponents/switch/SwitchCustom";
+import {
+  useFilterApplied,
+  useResetFilters,
+  useSize,
+} from "../../../utils/zustandUtils";
+import React, {useState} from "react";
+import {DropdownCustom} from "../../../components/filtersComponents/dropdown/DropdownCustom";
+import {FilterAppliedType, UserIDType} from "../../../utils/types";
+import {EMPTY_STRING} from "../../../utils/emptyState";
 
-export const Filters = () => {
-  const EMPTY_STRING = "";
+export const Filters = ({menuItemUserId}: UserIDType) => {
+
   const [nameValue, setNameValue] = useState<string>(EMPTY_STRING);
-  const { isStretched } = useSize();
+  const {isStretched} = useSize();
+  const {isClickResetFilterButton, setIsClickResetFilterButtonToTrue} =
+      useResetFilters();
+  const {resetFilterApplied, setFilterApplied} = useFilterApplied();
 
-  const setIsClickResetFilterButtonToTrue = useResetFilters(
-    (state) => state.setIsClickResetFilterButtonToTrue,
-  );
-  const isResetFiltersClicked = useResetFilters(
-    (state) => state.isClickResetFilterButton,
-  );
+  const onSubmitAction = () =>
+      setFilterApplied({title: nameValue} as FilterAppliedType);
+  const handleReset = () => {
+    setIsClickResetFilterButtonToTrue();
+    resetFilterApplied();
+  };
 
   return (
-    <Box className={"filters-container"}>
-      {!isStretched && <Box className={"filters-title"}>Filters</Box>}
-      <Box className={"inner-filters-container"}>
-        <TextInputCustom
-          isResetAction={isResetFiltersClicked}
-          textValue={nameValue}
-          setTextValue={setNameValue}
-          placeholder={"Search..."}
-        />
-        <SwitchCustom isResetAction={isResetFiltersClicked} />
-        <DropdownCustom />
-        {/*<TextInputCustom
-                    isResetAction={isResetFiltersClicked}
-                    textValue={idValue}
-                    setTextValue={setIdValue}
-                    placeholder={"Select user ID"}
-                />*/}
+      <Box className={"filters-container"}>
+        {!isStretched && <Box className={"filters-title"}>Filters</Box>}
+        <Box className={"inner-filters-container"}>
+          <TextInputCustom
+              isResetAction={isClickResetFilterButton}
+              actionTextInput={onSubmitAction}
+              textValue={nameValue}
+              setTextValue={setNameValue}
+              placeholder={"Search..."}
+          />
+          <SwitchCustom isResetAction={isClickResetFilterButton}/>
+          <DropdownCustom
+              isResetAction={isClickResetFilterButton}
+              menuItemUserId={menuItemUserId}
+          />
+        </Box>
+        <Box
+            onClick={handleReset}
+            component={"h1"}
+            className={"reset-filters-button"}
+        >
+          Reset filters
+        </Box>
       </Box>
-      <Box
-        onClick={setIsClickResetFilterButtonToTrue}
-        component={"h1"}
-        className={"reset-filters-button"}
-      >
-        Reset filters
-      </Box>
-    </Box>
   );
 };

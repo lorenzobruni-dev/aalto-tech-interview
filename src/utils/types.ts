@@ -6,3 +6,5 @@ export type TodoType = {
 };
 
 export type FilterAppliedType = Pick<TodoType, 'title' | 'completed' | "userId">
+
+export type UserIDType = { menuItemUserId: number[] };

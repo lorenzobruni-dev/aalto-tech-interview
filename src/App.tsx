@@ -1,29 +1,20 @@
 import "./styles/App.css";
 import "./styles/gridStyle.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, useMediaQuery } from "@mui/material";
 import { Topbar } from "./pages/topbar/Topbar.tsx";
 import { Footer } from "./pages/footer/Footer.tsx";
 import { BodyApplication } from "./pages/body/BodyApplication.tsx";
-import {
-  useDataFetch,
-  useFilterApplied,
-  useResetFilters,
-  useSize,
-} from "./utils/zustandUtils";
+import { useDataFetch, useResetFilters, useSize } from "./utils/zustandUtils";
+import { map, uniq } from "lodash";
 
 const App = () => {
-  const isResetFiltersClicked = useResetFilters(
-    (state) => state.isClickResetFilterButton,
-  );
-  const setIsClickResetFilterButtonToTrue = useResetFilters(
-    (state) => state.setIsClickResetFilterButtonToFalse,
-  );
-  const { filterApplied } = useFilterApplied();
-  const { setData } = useDataFetch();
+  const { isClickResetFilterButton, setIsClickResetFilterButtonToFalse } =
+    useResetFilters();
+  const { setData, data } = useDataFetch();
   const { setIsStretched } = useSize();
+  const [menuItemUserId, setUserId] = useState<number[]>([]);
   const isStretched = useMediaQuery("(max-width: 700px)");
-
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/todos")
       .then((response) => response.json())
@@ -36,14 +27,18 @@ const App = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (isResetFiltersClicked) setIsClickResetFilterButtonToTrue();
+      if (isClickResetFilterButton) setIsClickResetFilterButtonToFalse();
     }, 1500);
-  }, [isResetFiltersClicked]);
+  }, [isClickResetFilterButton]);
+
+  useEffect(() => {
+    setUserId(uniq(map(data, "userId")));
+  }, [data]);
 
   return (
     <Box className={"grid-container"}>
       <Topbar />
-      <BodyApplication />
+      <BodyApplication menuItemUserId={menuItemUserId} />
       <Footer />
     </Box>
   );

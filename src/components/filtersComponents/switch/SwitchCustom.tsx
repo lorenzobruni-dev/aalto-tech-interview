@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box, FormControlLabel, styled, Switch, Theme } from "@mui/material";
 import "./switchStyle.css";
+import { useFilterApplied } from "../../../utils/zustandUtils";
+import { FilterAppliedType } from "../../../utils/types";
 
 interface SwitchThemeProps {
   theme: Theme;
@@ -12,6 +14,7 @@ type SwitchCustomType = {
 
 export const SwitchCustom: React.FC<SwitchCustomType> = ({ isResetAction }) => {
   const [switchChecked, setSwitchChecked] = useState<boolean>(true);
+  const { setFilterApplied } = useFilterApplied();
   const SwitchOnOff = styled(Switch)(({ theme }: SwitchThemeProps) => ({
     padding: 8,
     "& .MuiSwitch-track": {
@@ -48,6 +51,10 @@ export const SwitchCustom: React.FC<SwitchCustomType> = ({ isResetAction }) => {
   useEffect(() => {
     if (isResetAction) setSwitchChecked(true);
   }, [isResetAction]);
+
+  useEffect(() => {
+    setFilterApplied({ completed: switchChecked } as FilterAppliedType);
+  }, [switchChecked]);
 
   return (
     <Box style={{ width: "100%", marginLeft: 2 }}>
