@@ -9,11 +9,17 @@ interface SwitchThemeProps {
 }
 
 type SwitchCustomType = {
+  completedToEdit: boolean;
   isResetAction: boolean;
 };
 
-export const SwitchCustom: React.FC<SwitchCustomType> = ({ isResetAction }) => {
-  const [switchChecked, setSwitchChecked] = useState<boolean>(true);
+export const SwitchCustom: React.FC<SwitchCustomType> = ({
+  isResetAction,
+  completedToEdit,
+}) => {
+  const [switchChecked, setSwitchChecked] = useState<boolean>(
+    completedToEdit ?? true,
+  );
   const { setFilterApplied } = useFilterApplied();
   const SwitchOnOff = styled(Switch)(({ theme }: SwitchThemeProps) => ({
     padding: 8,

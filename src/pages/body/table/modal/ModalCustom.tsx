@@ -4,7 +4,7 @@ import { OperationType, TypeFieldsTable } from "../../../../utils/types";
 import { DropdownCustom } from "../../../../components/filtersComponents/dropdown/DropdownCustom";
 import { SwitchCustom } from "../../../../components/filtersComponents/switch/SwitchCustom";
 import "./modalStyle.css";
-import { useMenuUserId } from "../../../../utils/zustandUtils";
+import { useDataFetch, useMenuUserId } from "../../../../utils/zustandUtils";
 
 type ModalCustomProps = {
   opType: OperationType;
@@ -22,6 +22,7 @@ export const ModalCustom = ({
   const [textValue, setTextValue] = useState<string>("");
   const [completed, setCompleted] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
+  const { addRowToDataStructure } = useDataFetch();
   const { menuItemUserId } = useMenuUserId;
 
   useEffect(() => {
@@ -36,9 +37,18 @@ export const ModalCustom = ({
     }
   }, [opType, fieldsToEdit]);
 
+  const handleSave = () => {
+    addRowToDataStructure({
+      title: textValue,
+      completed: completed,
+      userId: userId,
+    } as TypeFieldsTable);
+    handleClose();
+  };
+
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box className={"modal-container"}>
+      <Box className={"modal-container"} p={4}>
         <Box className={"title-section"} sx={{ fontSize: 24 }}>
           {opType === OperationType.EDIT ? "Edit" : "Create"}
         </Box>
@@ -51,16 +61,17 @@ export const ModalCustom = ({
             fullWidth
           />
           <DropdownCustom
+            userIdToEdit={userId}
             isResetAction={false}
             menuItemUserId={menuItemUserId}
           />
-          <SwitchCustom isResetAction={false} />
+          <SwitchCustom completedToEdit={completed} isResetAction={false} />
         </Box>
         <Button
           variant={"contained"}
           fullWidth
           className={"save-button"}
-          onClick={handleClose}
+          onClick={handleSave}
         >
           Save
         </Button>

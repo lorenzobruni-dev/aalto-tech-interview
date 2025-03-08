@@ -3,6 +3,7 @@
     src: url("assets/font/karbon-regular-webfont.ttf") format("truetype"),
     url("assets/font/karbon-semibold-webfont.ttf") format("truetype");
 }
+
 @font-face {
     font-family: 'Karbon Semibold';
     src: url('assets/font/karbon-semibold-webfont.ttf') format('truetype');
@@ -21,27 +22,29 @@
     color: white;
 
 }
-::-webkit-scrollbar{
-    width: 10px;
+
+::-webkit-scrollbar {
+    width: 12px;
 }
 
-::-webkit-scrollbar-track-piece{
+::-webkit-scrollbar-track-piece {
     background-color: #FFF;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: #CBCBCB;
     outline: 2px solid #FFF;
     outline-offset: -2px;
     border: 1px solid #B7B7B7;
+    border-radius: 8px;
+
 }
 
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
     background-color: #909090;
 }
 
-
-html , body {
+html, body {
     margin: 0;
     padding: 0;
     width: 100%;

@@ -14,11 +14,14 @@ import { EMPTY_STRING } from "../../../utils/emptyState";
 
 type DropdownCustomType = {
   isResetAction: boolean;
+  userIdToEdit?: string;
 };
-export const DropdownCustom = ({ isResetAction }: DropdownCustomType) => {
+export const DropdownCustom = ({
+  isResetAction,
+  userIdToEdit,
+}: DropdownCustomType) => {
   const { menuItemUserId } = useMenuUserId();
-
-  const [userId, setUserId] = useState<string>(EMPTY_STRING);
+  const [userId, setUserId] = useState<string>(userIdToEdit ?? EMPTY_STRING);
   const { isStretched } = useSize();
   const { setFilterApplied } = useFilterApplied();
   const handleChange = (event: SelectChangeEvent) => {

@@ -1,5 +1,5 @@
-import "./styles/App.css";
-import "./styles/gridStyle.css";
+import "./App.css";
+import "./gridStyle.css";
 import React, { useEffect } from "react";
 import { Box, useMediaQuery } from "@mui/material";
 import { Topbar } from "./pages/topbar/Topbar.tsx";
