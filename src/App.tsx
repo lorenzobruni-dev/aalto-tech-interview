@@ -1,34 +1,38 @@
 import "./App.css";
 import "./gridStyle.css";
-import React, { useEffect } from "react";
-import { Box, useMediaQuery } from "@mui/material";
-import { Topbar } from "./pages/topbar/Topbar.tsx";
-import { Footer } from "./pages/footer/Footer.tsx";
-import { BodyApplication } from "./pages/body/BodyApplication.tsx";
+import React, {useEffect} from "react";
+import {Box, useMediaQuery} from "@mui/material";
+import {Topbar} from "./pages/topbar/Topbar.tsx";
+import {Footer} from "./pages/footer/Footer.tsx";
+import {BodyApplication} from "./pages/body/BodyApplication.tsx";
 import {
   useDataFetch,
   useMenuUserId,
   useResetFilters,
   useSize,
 } from "./utils/zustandUtils";
-import { map, uniq } from "lodash";
+import {map, orderBy, uniq} from "lodash";
 
 const App = () => {
-  const { isClickResetFilterButton, setIsClickResetFilterButtonToFalse } =
-    useResetFilters();
-  const { setData, data } = useDataFetch();
-  const { setIsStretched } = useSize();
-  const { setMenuItemUserId } = useMenuUserId();
+  const {isClickResetFilterButton, setIsClickResetFilterButtonToFalse} =
+      useResetFilters();
+  const {setData, data} = useDataFetch();
+  const {setIsStretched} = useSize();
+  const {setMenuItemUserId} = useMenuUserId();
   const isStretched = useMediaQuery("(max-width: 700px)");
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((data) => setData(data));
+        .then((response) => response.json())
+        .then((data) => setData(data));
   }, []);
 
   useEffect(() => {
     setIsStretched(isStretched);
   }, [isStretched]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data])
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,15 +41,16 @@ const App = () => {
   }, [isClickResetFilterButton]);
 
   useEffect(() => {
-    setMenuItemUserId(uniq(map(data, "userId")));
+    setMenuItemUserId(orderBy(uniq(map(data, "userId")), [], ["asc"]));
   }, [data]);
 
+
   return (
-    <Box className={"grid-container"}>
-      <Topbar />
-      <BodyApplication />
-      <Footer />
-    </Box>
+      <Box className={"grid-container"}>
+        <Topbar/>
+        <BodyApplication/>
+        <Footer/>
+      </Box>
   );
 };
 

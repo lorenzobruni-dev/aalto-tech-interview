@@ -15,18 +15,22 @@ import { EMPTY_STRING } from "../../../utils/emptyState";
 type DropdownCustomType = {
   isResetAction: boolean;
   userIdToEdit?: string;
+  modelAction?: (value: string) => void;
 };
 export const DropdownCustom = ({
   isResetAction,
   userIdToEdit,
+  modelAction,
 }: DropdownCustomType) => {
   const { menuItemUserId } = useMenuUserId();
   const [userId, setUserId] = useState<string>(userIdToEdit ?? EMPTY_STRING);
   const { isStretched } = useSize();
   const { setFilterApplied } = useFilterApplied();
   const handleChange = (event: SelectChangeEvent) => {
-    setUserId(event.target.value as string);
-    setFilterApplied({ userId: event.target.value } as TypeFieldsTable);
+    const userId = event.target.value as string;
+    setUserId(userId);
+    if (modelAction) modelAction(userId);
+    else setFilterApplied({ userId: userId } as TypeFieldsTable);
   };
 
   useEffect(() => {

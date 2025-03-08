@@ -10,26 +10,26 @@ import {
   Pagination,
   Button,
 } from "@mui/material";
-import { OperationType, TodoType, TypeFieldsTable } from "../../../utils/types";
+import { OperationType, TodoType } from "../../../utils/types";
 import "./tableStyle.css";
 import { useDataFetch, useFilterApplied } from "../../../utils/zustandUtils";
 import { filter, includes, pickBy, toLower } from "lodash";
-import { EMPTY_STATE_FILTER, ROWS_PER_PAGE } from "../../../utils/emptyState";
+import { EMPTY_STATE_DATA, ROWS_PER_PAGE } from "../../../utils/emptyState";
 import { ModalCustom } from "./modal/ModalCustom";
 
 export const TableTodo = () => {
   const { data } = useDataFetch();
   const { filterApplied } = useFilterApplied();
   const [open, setOpen] = useState<boolean>(false);
-  const [fieldsToEdit, setFieldsToEdit] = useState<TypeFieldsTable | undefined>(
-    EMPTY_STATE_FILTER,
+  const [fieldsToEdit, setFieldsToEdit] = useState<TodoType | undefined>(
+    EMPTY_STATE_DATA,
   );
   const [operationType, setOperationType] = useState<OperationType>(
     OperationType.EDIT,
   );
   const [page, setPage] = useState<number>(1);
   const handleClose = () => setOpen(false);
-  const handleOpen = (opType: OperationType, fields?: TypeFieldsTable) => {
+  const handleOpen = (opType: OperationType, fields?: TodoType) => {
     if (fields) setFieldsToEdit(fields);
     else setFieldsToEdit(undefined);
     setOperationType(opType);
@@ -112,7 +112,7 @@ export const TableTodo = () => {
               </TableRow>
             ) : (
               contentToRenderInRow.map((todo, key) => (
-                <Fragment key={key}>
+                <Fragment key={todo.id}>
                   <TableRow className={"padding-between-rows"} />
                   <TableRow
                     className={"table-row-todo"}
@@ -150,18 +150,17 @@ export const TableTodo = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {contentToRenderInRow.length > 1 && filteredData.length !== 0 && (
-        <Pagination
-          count={Math.ceil(data.length / ROWS_PER_PAGE)}
-          page={page}
-          onChange={(event, value) => setPage(value)}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: 2,
-          }}
-        />
-      )}
+
+      <Pagination
+        count={Math.ceil(data.length / ROWS_PER_PAGE)}
+        page={page}
+        onChange={(event, value) => setPage(value)}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 2,
+        }}
+      />
     </Paper>
   );
 };

@@ -11,11 +11,13 @@ interface SwitchThemeProps {
 type SwitchCustomType = {
   completedToEdit: boolean;
   isResetAction: boolean;
+  modalAction: (value: boolean) => void;
 };
 
 export const SwitchCustom: React.FC<SwitchCustomType> = ({
   isResetAction,
   completedToEdit,
+  modalAction,
 }) => {
   const [switchChecked, setSwitchChecked] = useState<boolean>(
     completedToEdit ?? true,
@@ -59,8 +61,9 @@ export const SwitchCustom: React.FC<SwitchCustomType> = ({
   }, [isResetAction]);
 
   useEffect(() => {
-    setFilterApplied({ completed: switchChecked } as TypeFieldsTable);
-  }, [switchChecked]);
+    if (modalAction) modalAction(switchChecked);
+    else setFilterApplied({ completed: switchChecked } as TypeFieldsTable);
+  }, [switchChecked, modalAction, setFilterApplied]);
 
   return (
     <Box style={{ width: "100%", marginLeft: 2 }}>

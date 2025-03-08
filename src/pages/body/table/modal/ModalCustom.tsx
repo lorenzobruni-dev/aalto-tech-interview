@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Modal, TextField } from "@mui/material";
-import { OperationType, TypeFieldsTable } from "../../../../utils/types";
+import {
+  OperationType,
+  TodoType,
+  TypeFieldsTable,
+} from "../../../../utils/types";
 import { DropdownCustom } from "../../../../components/filtersComponents/dropdown/DropdownCustom";
 import { SwitchCustom } from "../../../../components/filtersComponents/switch/SwitchCustom";
 import "./modalStyle.css";
@@ -10,7 +14,7 @@ type ModalCustomProps = {
   opType: OperationType;
   open: boolean;
   handleClose: () => void;
-  fieldsToEdit?: TypeFieldsTable;
+  fieldsToEdit?: TodoType;
 };
 
 export const ModalCustom = ({
@@ -22,30 +26,39 @@ export const ModalCustom = ({
   const [textValue, setTextValue] = useState<string>("");
   const [completed, setCompleted] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
-  const { addRowToDataStructure } = useDataFetch();
+  const { addRowToDataStructure, editRowDataStructure } = useDataFetch();
   const { menuItemUserId } = useMenuUserId;
-
   useEffect(() => {
     if (opType === OperationType.EDIT && fieldsToEdit) {
       setTextValue(fieldsToEdit.title || "");
       setCompleted(fieldsToEdit.completed || false);
       setUserId(fieldsToEdit.userId?.toString() || "");
-    } else {
-      setTextValue("");
-      setCompleted(false);
-      setUserId("");
-    }
+    } else resetFields();
   }, [opType, fieldsToEdit]);
 
   const handleSave = () => {
-    addRowToDataStructure({
+    const content = {
       title: textValue,
       completed: completed,
       userId: userId,
-    } as TypeFieldsTable);
+      id: fieldsToEdit?.id,
+    } as TypeFieldsTable;
+    if (opType === OperationType.CREATE) addRowToData(content);
+    else editRowData(content);
+    resetFields();
     handleClose();
   };
 
+  const addRowToData = (rowToEdit: TypeFieldsTable) =>
+    addRowToDataStructure(rowToEdit);
+  const editRowData = (rowToCreate: TypeFieldsTable) =>
+    editRowDataStructure(rowToCreate);
+
+  const resetFields = () => {
+    setTextValue("");
+    setCompleted(true);
+    setUserId("");
+  };
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className={"modal-container"} p={4}>
@@ -61,11 +74,16 @@ export const ModalCustom = ({
             fullWidth
           />
           <DropdownCustom
+            modelAction={setUserId}
             userIdToEdit={userId}
             isResetAction={false}
             menuItemUserId={menuItemUserId}
           />
-          <SwitchCustom completedToEdit={completed} isResetAction={false} />
+          <SwitchCustom
+            modalAction={setCompleted}
+            completedToEdit={completed}
+            isResetAction={false}
+          />
         </Box>
         <Button
           variant={"contained"}
