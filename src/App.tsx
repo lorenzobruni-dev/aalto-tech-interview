@@ -5,7 +5,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import { Topbar } from "./pages/topbar/Topbar.tsx";
 import { Footer } from "./pages/footer/Footer.tsx";
 import { BodyApplication } from "./pages/body/BodyApplication.tsx";
-import { useDataFetch, useResetFilters, useSize } from "./utils/zustandUtils";
+import {useDataFetch, useFilterApplied, useResetFilters, useSize} from "./utils/zustandUtils";
 
 const App = () => {
   const isResetFiltersClicked = useResetFilters(
@@ -14,6 +14,8 @@ const App = () => {
   const setIsClickResetFilterButtonToTrue = useResetFilters(
     (state) => state.setIsClickResetFilterButtonToFalse,
   );
+  const {filterApplied} = useFilterApplied()
+console.log(filterApplied)
   const { setData } = useDataFetch();
   const { setIsStretched } = useSize();
   const isStretched = useMediaQuery("(max-width: 700px)");
