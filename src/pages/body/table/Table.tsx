@@ -19,7 +19,6 @@ export const TableTodo = () => {
   const ROWS_PER_PAGE = 5;
 
   const startIndex: number = (page - 1) * ROWS_PER_PAGE;
-  console.log(data);
   const selectedTodos: TodoType[] = data.slice(
     startIndex,
     startIndex + ROWS_PER_PAGE,
