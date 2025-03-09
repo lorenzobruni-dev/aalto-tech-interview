@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Modal, TextField } from "@mui/material";
-import {
-  OperationType,
-  TodoType,
-  TypeFieldsTable,
-} from "../../../../utils/types";
+import { OperationType, TodoType } from "../../../../utils/types";
 import { DropdownCustom } from "../../../../components/filtersComponents/dropdown/DropdownCustom";
 import { SwitchCustom } from "../../../../components/filtersComponents/switch/SwitchCustom";
 import "./modalStyle.css";
@@ -28,7 +24,11 @@ export const ModalCustom = ({
   const [textValue, setTextValue] = useState<string>("");
   const [completed, setCompleted] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
-  const { addRowToDataStructure, editRowDataStructure } = useDataFetch();
+  const {
+    addRowToDataStructure,
+    editRowDataStructure,
+    deleteRowDataStructure,
+  } = useDataFetch();
   const { menuItemUserId } = useMenuUserId;
   useEffect(() => {
     if (opType === OperationType.EDIT && fieldsToEdit) {
@@ -44,16 +44,27 @@ export const ModalCustom = ({
       completed: completed,
       userId: userId,
       id: fieldsToEdit?.id ?? dataLength + 1,
-    } as TypeFieldsTable;
+    } as TodoType;
     if (opType === OperationType.CREATE) addRowToData(content);
     else editRowData(content);
     resetFields();
     handleClose();
   };
 
-  const addRowToData = (rowToEdit: TypeFieldsTable) =>
+  const handleDelete = () => {
+    const content = {
+      title: textValue,
+      completed: completed,
+      userId: userId,
+      id: fieldsToEdit?.id ?? dataLength + 1,
+    } as TodoType;
+    deleteRowDataStructure(content);
+    handleClose();
+  };
+
+  const addRowToData = (rowToEdit: TodoType) =>
     addRowToDataStructure(rowToEdit);
-  const editRowData = (rowToCreate: TypeFieldsTable) =>
+  const editRowData = (rowToCreate: TodoType) =>
     editRowDataStructure(rowToCreate);
 
   const resetFields = () => {
@@ -87,14 +98,27 @@ export const ModalCustom = ({
             isResetAction={false}
           />
         </Box>
-        <Button
-          variant={"contained"}
-          fullWidth
-          className={"save-button"}
-          onClick={handleSave}
-        >
-          Save
-        </Button>
+        <Box className={"container-buttons-modal"}>
+          <Button
+            variant={"contained"}
+            fullWidth
+            className={"save-button"}
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+          {opType === OperationType.EDIT && (
+            <Button
+              variant={"contained"}
+              fullWidth
+              className={"save-button"}
+              onClick={handleDelete}
+              color={"error"}
+            >
+              Delete
+            </Button>
+          )}
+        </Box>
       </Box>
     </Modal>
   );

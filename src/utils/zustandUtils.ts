@@ -19,16 +19,23 @@ export const useResetFilters = create((set) => ({
 export const useDataFetch = create((set, get) => ({
   data: [],
   setData: (data) => set({ data: data }),
-  addRowToDataStructure: (newRow) => {
+  addRowToDataStructure: (newRow: TodoType) => {
     set({ data: [newRow, ...get().data] });
   },
-  editRowDataStructure: (editRow) => {
+  editRowDataStructure: (editRow: TodoType) => {
     const data: TodoType[] = get().data;
     const rowIndex: number = data.findIndex((index) => index.id === editRow.id);
     if (rowIndex !== -1) {
       data[rowIndex] = { ...data[rowIndex], ...editRow };
       set({ data });
     }
+  },
+  deleteRowDataStructure: (deleteRow: TodoType) => {
+    const data: TodoType[] = get().data;
+    const updatedData: TodoType[] = data.filter(
+      (index) => index.id !== deleteRow.id,
+    );
+    set({ data: updatedData });
   },
 }));
 

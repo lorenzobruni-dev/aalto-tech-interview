@@ -23,6 +23,8 @@ Project for Aalto – Tech Interview Submission
 
 - Filters panel todo task on left side
 - Table panel with rendered the right todo task to show it
+- Clicking on a specific Table row you'll open an Edit Modal for making changes on that specific record
+- Add delete button in edit modal
 
 ## Setup & Installation
 

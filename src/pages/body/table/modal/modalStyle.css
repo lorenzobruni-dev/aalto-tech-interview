@@ -18,6 +18,10 @@
     margin-top: 16px;
 }
 
-.save-button .MuiButton-root {
+
+.container-buttons-modal {
     margin-top: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
 }
