@@ -4,4 +4,10 @@ export const EMPTY_STATE_FILTER = {
   title: EMPTY_STRING,
   completed: true,
 };
+export const EMPTY_STATE_DATA = {
+  id: 0,
+  userId: 0,
+  title: EMPTY_STRING,
+  completed: true,
+};
 export const ROWS_PER_PAGE = 5;

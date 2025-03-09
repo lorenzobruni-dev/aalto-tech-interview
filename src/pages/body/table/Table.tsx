@@ -41,7 +41,6 @@ export const TableTodo = () => {
     startIndex + ROWS_PER_PAGE,
   );
   const activeFilters = pickBy(filterApplied, Boolean);
-
   const filteredData = filter(data, (item) =>
     Object.entries(activeFilters).every(([key, value]) => {
       if (key === "title") {
@@ -53,7 +52,6 @@ export const TableTodo = () => {
 
   const contentToRenderInRow =
     filteredData.length == 1 ? filteredData : selectedTodos;
-
   return (
     <Paper
       sx={{
@@ -76,6 +74,7 @@ export const TableTodo = () => {
       </Button>
 
       <ModalCustom
+        dataLength={data.length}
         opType={operationType}
         fieldsToEdit={fieldsToEdit}
         handleClose={handleClose}
@@ -111,7 +110,7 @@ export const TableTodo = () => {
                 </TableCell>
               </TableRow>
             ) : (
-              contentToRenderInRow.map((todo, key) => (
+              contentToRenderInRow.map((todo) => (
                 <Fragment key={todo.id}>
                   <TableRow className={"padding-between-rows"} />
                   <TableRow
@@ -151,16 +150,18 @@ export const TableTodo = () => {
         </Table>
       </TableContainer>
 
-      <Pagination
-        count={Math.ceil(data.length / ROWS_PER_PAGE)}
-        page={page}
-        onChange={(event, value) => setPage(value)}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: 2,
-        }}
-      />
+      {filteredData.length > 0 && (
+        <Pagination
+          count={Math.ceil(data.length / ROWS_PER_PAGE)}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 2,
+          }}
+        />
+      )}
     </Paper>
   );
 };

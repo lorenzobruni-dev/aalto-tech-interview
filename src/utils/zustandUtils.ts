@@ -19,7 +19,6 @@ export const useDataFetch = create((set, get) => ({
   editRowDataStructure: (editRow) => {
     const data: TodoType[] = get().data;
     const rowIndex: number = data.findIndex((index) => index.id === editRow.id);
-    console.log(rowIndex);
     if (rowIndex !== -1) {
       data[rowIndex] = { ...data[rowIndex], ...editRow };
       set({ data });

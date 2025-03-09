@@ -14,6 +14,7 @@ type ModalCustomProps = {
   opType: OperationType;
   open: boolean;
   handleClose: () => void;
+  dataLength: number;
   fieldsToEdit?: TodoType;
 };
 
@@ -21,6 +22,7 @@ export const ModalCustom = ({
   open,
   handleClose,
   opType,
+  dataLength,
   fieldsToEdit,
 }: ModalCustomProps) => {
   const [textValue, setTextValue] = useState<string>("");
@@ -41,7 +43,7 @@ export const ModalCustom = ({
       title: textValue,
       completed: completed,
       userId: userId,
-      id: fieldsToEdit?.id,
+      id: fieldsToEdit?.id ?? dataLength + 1,
     } as TypeFieldsTable;
     if (opType === OperationType.CREATE) addRowToData(content);
     else editRowData(content);
