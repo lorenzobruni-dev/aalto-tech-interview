@@ -1,3 +1,6 @@
+/**
+ * This ts file represents the majority of empty states using it inside the project
+ */
 export const EMPTY_STRING = "";
 export const EMPTY_STATE_FILTER = {
   userId: 0,

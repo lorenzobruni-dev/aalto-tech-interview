@@ -2,6 +2,9 @@ import { create } from "zustand";
 import { EMPTY_STATE_FILTER, EMPTY_STRING } from "./emptyState";
 import { TodoType, TypeFieldsTable } from "./types";
 
+/**
+ * Zustand store to manage the reset filter
+ */
 export const useResetFilters = create((set) => ({
   isClickResetFilterButton: false,
   setIsClickResetFilterButtonToTrue: () =>
@@ -10,6 +13,9 @@ export const useResetFilters = create((set) => ({
     set({ isClickResetFilterButton: false }),
 }));
 
+/**
+ * Zustand store to manage data fetched from App.tsx and others
+ */
 export const useDataFetch = create((set, get) => ({
   data: [],
   setData: (data) => set({ data: data }),
@@ -26,11 +32,17 @@ export const useDataFetch = create((set, get) => ({
   },
 }));
 
+/**
+ * Zustand store to manage resize of screen
+ */
 export const useSize = create((set) => ({
   isStretched: [],
   setIsStretched: (state) => set({ isStretched: state }),
 }));
 
+/**
+ * Zustand store to manage applied filters.
+ */
 export const useFilterApplied = create((set) => ({
   filterApplied: EMPTY_STATE_FILTER as TypeFieldsTable,
   resetFilterApplied: () =>
@@ -47,6 +59,9 @@ export const useFilterApplied = create((set) => ({
     })),
 }));
 
+/**
+ * Zustand store to manage the menu user IDs.
+ */
 export const useMenuUserId = create((set) => ({
   menuItemUserId: [],
   setMenuItemUserId: (state) => set({ menuItemUserId: state }),
