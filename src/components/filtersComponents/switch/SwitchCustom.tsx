@@ -9,9 +9,9 @@ interface SwitchThemeProps {
 }
 
 type SwitchCustomType = {
-  completedToEdit: boolean;
   isResetAction: boolean;
-  modalAction: (value: boolean) => void;
+  modalAction?: (value: boolean) => void;
+  completedToEdit?: boolean;
 };
 
 export const SwitchCustom: React.FC<SwitchCustomType> = ({
@@ -70,12 +70,10 @@ export const SwitchCustom: React.FC<SwitchCustomType> = ({
       <FormControlLabel
         label={switchChecked ? "Completed" : "Not completed"}
         control={
-          (
-            <SwitchOnOff
-              checked={switchChecked}
-              onChange={() => setSwitchChecked(!switchChecked)}
-            />
-          ) as React.ReactNode
+          <SwitchOnOff
+            checked={switchChecked}
+            onChange={() => setSwitchChecked(!switchChecked)}
+          />
         }
         className={"form-control-label"}
       />
