@@ -42,7 +42,7 @@ export const ModalCustom = ({
     const content = {
       title: textValue,
       completed: completed,
-      userId: userId,
+      userId: Number(userId),
       id: fieldsToEdit?.id ?? dataLength + 1,
     } as TodoType;
     if (opType === OperationType.CREATE) addRowToData(content);
